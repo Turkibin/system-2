@@ -8,6 +8,9 @@
   },
   "author": "",
   "license": "ISC",
+  "engines": {
+    "node": "18.x"
+  },
   "dependencies": {
     "@discordjs/voice": "^0.16.0",
     "@napi-rs/canvas": "^0.1.44",
