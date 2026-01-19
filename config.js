@@ -23,7 +23,6 @@ if (process.env.TOKEN) config.token = process.env.TOKEN;
 if (process.env.PREFIX) config.prefix = process.env.PREFIX;
 if (process.env.GUILD_ID) config.Guild = process.env.GUILD_ID;
 if (process.env.OWNERS) {
-    // Expecting comma-separated IDs in env var: "id1,id2"
     try {
         config.owners = process.env.OWNERS.split(',').map(id => id.trim());
     } catch (e) {
