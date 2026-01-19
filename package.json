@@ -20,7 +20,6 @@
     "cloudinary": "^2.0.3",
     "config": "^3.3.9",
     "deepai": "^1.0.23",
-    "directus": "^10.6.3",
     "discord-html-transcripts": "^2.2.8",
     "discord-image-generation": "^1.4.25",
     "discord-inviter": "^0.9.3",
