@@ -1,0 +1,10 @@
+node_modules
+config.json
+*.log
+database.json
+Voice.json
+roles.json
+levelXPMap.json
+Saved/backup.json
+.env
+.DS_Store
