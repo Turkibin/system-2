@@ -1,5 +1,5 @@
 const { MessageEmbed } = require("discord.js");
-let config = require("../../config.json");
+const config = require(`${process.cwd()}/config`);
 const { prefix, owners } = require(`${process.cwd()}/config`);
 let fs = require("fs");
 const Data = require("pro.db");

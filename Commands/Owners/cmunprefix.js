@@ -1,5 +1,6 @@
 const fs = require("fs");
-const { prefix, owners } = require(`${process.cwd()}/config`);
+const { owners } = require(`${process.cwd()}/config`);
+const config = require(`${process.cwd()}/config`);
 
 module.exports = {
     name: 'cmunprefix',

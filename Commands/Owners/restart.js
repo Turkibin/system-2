@@ -1,7 +1,7 @@
 const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
-const config = require("../../config.json");
-const Data = require("pro.db");
 const { owners } = require(`${process.cwd()}/config`);
+const config = require(`${process.cwd()}/config`);
+const Data = require("pro.db");
 const fs = require("fs");
 
 module.exports = {
