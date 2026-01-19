@@ -53,7 +53,14 @@ try {
     console.error("❌ Handler initialization failed:", error);
 }
 client.prefix = prefix;
-client.login(config.token).catch(err => console.error("Login failed:", err));
+client.login(config.token).then(() => {
+    console.log("✅ Successfully logged into Discord!");
+  }).catch(err => {
+    console.error("❌ Login failed:", err.message);
+    if (err.message.includes("TOKEN_INVALID")) {
+      console.error("👉 TIP: Make sure you have set the TOKEN variable in Railway Settings > Variables");
+    }
+  });
 
 // Keep process alive
 setInterval(() => {}, 60000);
