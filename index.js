@@ -27,7 +27,18 @@ process.on('uncaughtException', error => {
     console.error('Uncaught Exception:', error);
 });
 
-const client = new Client({ intents: 32767 });
+const client = new Client({ 
+    intents: 32767,
+    partials: ['MESSAGE', 'CHANNEL', 'REACTION']
+});
+
+client.on('error', error => {
+    console.error('Discord Client Error:', error);
+});
+
+client.on('warn', info => {
+    console.log('Discord Client Warning:', info);
+});
 
 
 
@@ -85,14 +96,24 @@ setInterval(() => {}, 60000);
                   let eventName = file.split('.')[0];
                   // Normalize event name casing
                   if (eventName.toLowerCase() === 'interactioncreate') eventName = 'interactionCreate';
+                  if (eventName.toLowerCase() === 'messagecreate') eventName = 'messageCreate';
+                  if (eventName.toLowerCase() === 'guildmemberadd') eventName = 'guildMemberAdd';
+                  if (eventName.toLowerCase() === 'guildmemberremove') eventName = 'guildMemberRemove';
                   
                   let eventPath = `${__dirname}/events/${folder}/${file}`;
-  
+                  
+                  // Avoid registering the same event from multiple files if they are empty polyfills
                   try {
                       let event = require(eventPath);
                       if (typeof event === 'function') {
-                          client.on(eventName, event.bind(null, client));
-                          console.log(`✅ Loaded event: ${eventName} from ${folder}/${file}`);
+                          // Check if function is empty (just a placeholder)
+                          const isPlaceholder = event.toString().replace(/\s/g, '').includes('=>{}');
+                          if (!isPlaceholder) {
+                            client.on(eventName, event.bind(null, client));
+                            console.log(`✅ Loaded event: ${eventName} from ${folder}/${file}`);
+                          } else {
+                            console.log(`ℹ️ Skipping placeholder event: ${eventName} from ${folder}/${file}`);
+                          }
                       }
                   } catch (error) {
                       console.error(`❌ Failed to load event ${file}:`, error);
